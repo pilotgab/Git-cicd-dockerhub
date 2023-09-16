@@ -5,7 +5,7 @@ on:
     branches: ['main']
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -23,6 +23,7 @@ jobs:
         run: npm test
 
   build_and_push_image_to_docker_registry:
+    needs: test
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps: 
