@@ -44,7 +44,7 @@ jobs:
       - name: Pull Docker Image from Docker Hub
         run: docker pull captaingab/appimage:latest
       - name: Tag Docker Image for ECR
-        run: docker tag your-dockerhub-username/your-image-name:latest your-account-id.dkr.ecr.us-east-1.amazonaws.com/your-image-name:latest
+        run: docker tag captaingab/appimage:latest 352566650999.dkr.ecr.us-east-1.amazonaws.com/captaingab/appimage:latest
 
       - name: Push Docker Image to Amazon ECR
         run: docker push 352566650999.dkr.ecr.us-east-1.amazonaws.com/captaingab/appimage:latest
