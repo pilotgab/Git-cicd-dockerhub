@@ -23,12 +23,8 @@ jobs:
         with:
           push: true
           tags: captaingab/appimage:latest 
-          
-  ecr: 
-    runs-on: ubuntu-latest
-    needs: build_and_push_image_to_docker_registry
-    steps:
-      - name: Checkout Repository
+ 
+      - name: Checkout Repository&build and deploy to ecr
         uses: actions/checkout@v2
         
       - name: Configure AWS Credentials
