@@ -44,7 +44,7 @@ jobs:
           
                 - name: Build Docker Image
                   run: |
-                    docker build -t appimage:latest -f .
+                    docker build -t captaingab/appimage:latest .
                     docker tag captaingab-appimage:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/vprofile-app-img:latest
                   env:
                     AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
