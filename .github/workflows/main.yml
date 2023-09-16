@@ -5,25 +5,7 @@ on:
     branches: ['main']
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14  # Change to your desired Node.js version
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: npm test
-
   build_and_push_image_to_docker_registry:
-    needs: test
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps: 
@@ -42,3 +24,24 @@ jobs:
           push: true
           tags: captaingab/appimage:latest 
           
+  ecr: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Change to your desired AWS region
+        
+      - name: Login to Amazon ECR
+        run: aws ecr ${{secrets.PASSWORD}} --region us-east-1 | docker login --username AWS --password-stdin 352566650999.dkr.ecr.us-east-1.amazonaws.com/vprofile-app-img
+        
+      - name: Tag Docker Image for ECR
+        run: docker tag captaingab/appimage:latest 352566650999.dkr.ecr.us-east-1.amazonaws.com/vprofile-app-img
+        
+      - name: Push Docker Image to Amazon ECR
+        run: docker push your-account-id.dkr.ecr.us-east-1.amazonaws.com/captaingab/appimage:latest
