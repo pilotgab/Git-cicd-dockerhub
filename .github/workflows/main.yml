@@ -47,4 +47,4 @@ jobs:
         run: docker tag captaingab/appimage:latest 352566650999.dkr.ecr.us-east-1.amazonaws.com/captaingab/appimage:latest
 
       - name: Push Docker Image to Amazon ECR
-        run: docker push 352566650999.dkr.ecr.us-east-1.amazonaws.com/vprofile-app-img:latest
+        run: docker push 352566650999.dkr.ecr.us-east-1.amazonaws.com/captaingab/appimage:latest
