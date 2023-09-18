@@ -97,14 +97,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{secrets.AWS_REGION}}
 
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v1
+    - uses: actions/checkout@v2
+    - uses: ThomasKliszowski/setup-kubectl@v1
       with:
-       version: 'latest'
-
-    - name: make it executabel 
-      run: chmod +x kubectl && mv kubectl /usr/local/bin
-
+       kube-config: ${{ secrets.KUBECONFIG }}
+       kube-version: 1.15.0
+   
     - name: Install Helm
       run: |
        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
