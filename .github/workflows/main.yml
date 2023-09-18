@@ -96,8 +96,7 @@ jobs:
      - name: Install Helm
        run: |
          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
-         env:
-          KUBECONFIG_CONTENTS: ${{ secrets.KUBECONFIG }}
+    
      - name: Deploy to Amazon EKS using Helm
        run: |
          helm upgrade --install vprofile applechat --set image.repository=${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/vprofile-app-img,image.tag=latest --kubeconfig=$KUBECONFIG_CONTENTS --namespace=prod
