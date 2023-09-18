@@ -72,10 +72,7 @@ jobs:
       run: |
        docker build -t captaingab/appimage:latest .
        docker tag captaingab/appimage:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/vprofile-app-img:latest
-       env:
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-
+       
 
     - name: Push Docker image to Amazon ECR
       id: push-ecr
