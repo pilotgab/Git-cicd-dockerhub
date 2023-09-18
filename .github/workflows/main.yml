@@ -14,7 +14,6 @@ jobs:
     - name: Build Docker image
       uses: docker/build-push-action@v5
       with:
-        context: .
         push: false
         tags: |
           docker.io/captaingab/appimage:latest
